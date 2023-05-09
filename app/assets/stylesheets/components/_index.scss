@@ -3,3 +3,16 @@
 @import "avatar";
 @import "form_legend_clear";
 @import "navbar";
+
+.card-holder{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.movie-card {
+background-color: blue;
+height: 150px;
+width: 250px;
+color: white;
+}

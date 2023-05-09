@@ -1,0 +1,20 @@
+
+<div class="navbar-lewagon">
+
+<h1> Display Movies to the page</h1>
+</div>
+
+<div class="container">
+  <div class="card-holder">
+  <% @list.each do |list| %>
+  <%= link_to list_path(list) do %>
+    <div class="movie-card text-center align-content-center">
+      <p> <%= list.name%></p>
+    </div>
+  <% end %>
+  <% end %>
+</div>
+
+
+
+</div>
