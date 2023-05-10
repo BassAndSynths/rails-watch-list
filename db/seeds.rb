@@ -1,49 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
+require "json"
 
-puts "cleaning Database"
+puts "Cleaning up database..."
 Movie.destroy_all
+puts "Database cleaned"
 
-# puts "creating movies"
-
-# 100.times do
-#   movie = Movie.create(
-#     title: Faker::Movie.title,
-#     overview: Faker::Movie.quote,
-#     poster_url: Faker::Name.name,
-#     rating: rand(1..5)
-#   )
-#   puts "movie with id: #{movie.id} has been created"
-# end
-
-puts "creating bookmarks"
-
-20.times do
-  bookmark = Bookmark.create(
-    comment: Faker::Quote.matz,
-    movie_id: rand(100..170),
-    list_id: rand(1..20)
-  )
-  puts "bookmark with id: #{bookmark.id} has been created"
-  puts "bookmark with comment: #{bookmark.comment} has been created"
-  puts "bookmark with Movie_id: #{bookmark.movie_id} has been created"
-  puts "bookmark with List_id: #{bookmark.list_id} has been created"
-
+url = "http://tmdb.lewagon.com/movie/top_rated"
+10.times do |i|
+  puts "Importing movies from page #{i + 1}"
+  movies = JSON.parse(URI.open("#{url}?page=#{i + 1}").read)['results']
+  movies.each do |movie|
+    puts "Creating #{movie['title']}"
+    base_poster_url = "https://image.tmdb.org/t/p/original"
+    movie = Movie.create(
+      title: movie["title"],
+      overview: movie["overview"],
+      poster_url: "#{base_poster_url}#{movie["backdrop_path"]}",
+      rating: movie["vote_average"]
+    )
+    list = List.create(name:"Test #{i}")
+    Bookmark.create(movie_id:movie.id, list_id:list.id, comment:"Testing #{i}")
+  end
 end
-
-# puts "creating lists"
-
-# 20.times do
-#   list = List.create(
-#     name: Faker::Creature::Animal.name,
-#   )
-#   puts "list with id: #{list.id} has been created"
-# end
-
-
-puts "finished"
+puts "Movies created"

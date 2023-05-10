@@ -1,6 +1,19 @@
 <h1>Hello </h1>
 
 <%= @list.name %>
-<%= pluralize(@list.movies.size, "movie") %>
+
+
+<div>
+  <ul>
+    <% @list.movies.each do |movie| %>
+      <li>
+        <%= movie.title %>
+        <%= movie.overview %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <hr>
+
+<%= link_to "Home Page", "/" %>

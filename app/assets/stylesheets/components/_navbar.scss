@@ -1,9 +1,36 @@
+
+$dark-blue: #1b263b;
+$mid-blue: #415a77;
+$light-blue: #778da9;
+$white: #e0e1dd;
+
 .navbar-lewagon {
   justify-content: space-between;
-  background-image: url("http://s.thestreet.com/files/tsc/v2008/photos/contrib/uploads/movietheaterinterior.jpg");
+  background: center/50% url("http://s.thestreet.com/files/tsc/v2008/photos/contrib/uploads/movietheaterinterior.jpg");
   height: 400px;
-  object-fit: scale-down;
+  object-fit: contain;
   color: white;
+  h1 {
+    position: relative;
+    top: 50%;
+    color: $white;
+  }
+
+  .button{
+    border: 2px solid $white;
+    padding: 15px 10px;
+    background-color: rgb(15, 92, 65);
+    border-radius: 5px;
+    text-decoration: none;
+    color: $white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    &:hover{
+      background-color: rgb(34, 148, 108);
+    }
+  }
 }
 
 .navbar-lewagon .navbar-collapse {

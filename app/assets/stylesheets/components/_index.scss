@@ -4,10 +4,23 @@
 @import "form_legend_clear";
 @import "navbar";
 
+$dark-blue: #1b263b;
+$mid-blue: #415a77;
+$light-blue: #778da9;
+$white: #e0e1dd;
+$spacer: 5px;
+
+body{
+  background-color: $dark-blue;
+}
+
+
+
 .card-holder{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: ($spacer*3);
 }
 
 .movie-card {
@@ -15,4 +28,14 @@ background-color: blue;
 height: 150px;
 width: 250px;
 color: white;
+margin-top: ($spacer*2);
+
+  p{
+    position: relative;
+    top: 50%;
+  }
+
+  a{
+    text-decoration: none;
+  }
 }
